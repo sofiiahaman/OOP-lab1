@@ -32,8 +32,6 @@ int main() {
     test_find_optimal_route();
     test_move_transport();
 
-
-
     cout << "\nAll tests passed successfully.\n";
     return 0;
 }

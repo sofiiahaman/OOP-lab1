@@ -189,15 +189,18 @@ void test_transport_basic() {
 
     assert(t.getName() == "Generic");
     assert(t.getPosition() == 0);
+    assert(t.getSpeed() == 50);
 
     t.move(10);
     assert(t.getPosition() == 10);
 
-    double prevSpeed = 50;
-
     t.brake(10);
+    assert(t.getSpeed() == 40);
+    t.accelerate(20);
+    assert(t.getSpeed() == 60);
 
-    assert(t.getPosition() == 10);
+    t.brake(100);
+    assert(t.getSpeed() == 0);
 
     cout << "test_transport_basic passed\n";
 }
@@ -217,8 +220,10 @@ void test_land_transport() {
     assert(l.getPosition() == 20);
 
     l.brake(10);
+    assert(l.getSpeed() == 50);
 
     l.accelerate(15);
+    assert(l.getSpeed() == 65);
 
     assert(l.hasFuel());
 
@@ -241,6 +246,11 @@ void test_water_transport() {
     w.move(0);
     assert(w.getPosition() == posBefore);
 
+    w.accelerate(15);
+    assert(w.getSpeed() == 55);
+    w.brake(20);
+    assert(w.getSpeed() == 35);
+
     assert(w.hasFuel());
 
     cout << "test_water_transport passed\n";
@@ -256,12 +266,13 @@ void test_air_transport() {
     assert(a.hasFuel());
 
     a.move(200);
-
     assert(a.getPosition() == 200);
 
     a.brake(100);
+    assert(a.getSpeed() == 700);
 
     a.accelerate(200);
+    assert(a.getSpeed() == 900);
 
     assert(a.hasFuel());
 
@@ -294,7 +305,9 @@ void test_car() {
     assert(car.getPosition() > 100);
 
     car.accelerate(30);
+    assert(car.getSpeed() == 150);
     car.brake(50);
+    assert(car.getSpeed() == 100);
 
     if (car.hasFuel()) {
         cout << "Car still has fuel left: " << car.getFuelLevel() << " L\n";
@@ -334,6 +347,11 @@ void test_train() {
 
     assert(train.getPosition() >= 100);
 
+    train.accelerate(20);
+    assert(train.getSpeed() == 170);
+    train.brake(30);
+    assert(train.getSpeed() == 140);
+
     train.info();
     cout << "test_train passed\n";
 }
@@ -362,6 +380,11 @@ void test_yacht() {
     assert(fuelAfter <= fuelBefore);
 
     assert(yacht.getPosition() >= 100);
+
+    yacht.accelerate(20);
+    assert(yacht.getSpeed() == 100);
+    yacht.brake(50);
+    assert(yacht.getSpeed() == 50);
 
     yacht.info();
     cout << "test_yacht passed\n";
@@ -393,7 +416,9 @@ void test_helicopter() {
     assert(heli.getPosition() >= 100);
 
     heli.accelerate(50);
+    assert(heli.getSpeed() == 300);
     heli.brake(100);
+    assert(heli.getSpeed() == 200);
 
     heli.info();
     cout << "test_helicopter passed\n";
@@ -526,9 +551,15 @@ void test_find_optimal_route() {
     vector<int> expected = { 1, 2, 3, 4 };
 
     assert(path.size() == expected.size());
+
+    bool routesMatch = true;
     for (size_t i = 0; i < path.size(); ++i) {
-        assert(path[i] == expected[i]);
+        if (path[i] != expected[i]) {
+            routesMatch = false;
+            break;
+        }
     }
+    assert(routesMatch);
 
     cout << "Expected route: ";
     for (int v : expected) cout << v << " ";

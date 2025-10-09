@@ -131,6 +131,10 @@ double Car::getFuelLevel() const {
     return currentFuel;
 }
 
+double Car::getSpeed() const {
+    return speed;
+}
+
 // Train
 Train::Train(string n, double s, int w, int c, double fuelCap, double consumptionRate)
     : LandTransport(n, s, w, fuelCap), carriages(c), fuelConsumptionRate(consumptionRate) {}
@@ -158,6 +162,10 @@ void Train::info() const {
 
 double Train::getFuelLevel() const {
     return currentFuel;
+}
+
+double Train::getSpeed() const {
+    return speed;
 }
 
 // Yacht
@@ -189,6 +197,10 @@ double Yacht::getFuelLevel() const {
     return currentFuel;
 }
 
+double Yacht::getSpeed() const {
+    return speed;
+}
+
 // Helicopter
 Helicopter::Helicopter(string n, double s, double a, int p, double fuelCap, double consumptionRate)
     : AirTransport(n, s, a, fuelCap), passengers(p), fuelConsumptionRate(consumptionRate) {}
@@ -216,4 +228,8 @@ void Helicopter::info() const {
 
 double Helicopter::getFuelLevel() const {
     return currentFuel;
+}
+
+double Helicopter::getSpeed() const {
+    return speed;
 }

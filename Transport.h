@@ -23,6 +23,7 @@ public:
 
     void updatePosition(double distance);
     double getPosition() const { return position; }
+    double getSpeed() const { return speed; }
 };
 
 // Land transport
@@ -38,6 +39,7 @@ public:
     void accelerate(double increment) override;
     void brake(double decrement) override;
     bool hasFuel() const override;
+    double getSpeed() const { return speed; }
 };
 
 // Water transport
@@ -76,6 +78,7 @@ public:
     void move(double distance) override;
     void info() const override;
     double getFuelLevel() const;
+    double getSpeed() const;
 };
 
 // Train
@@ -87,6 +90,7 @@ public:
     void move(double distance) override;
     void info() const override;
     double getFuelLevel() const;
+    double getSpeed() const;
 };
 
 // Yacht
@@ -98,6 +102,7 @@ public:
     void move(double distance) override;
     void info() const override;
     double getFuelLevel() const;
+    double getSpeed() const;
 };
 
 // Helicopter
@@ -109,6 +114,7 @@ public:
     void move(double distance) override;
     void info() const override;
     double getFuelLevel() const;
+    double getSpeed() const;
 };
 
 
